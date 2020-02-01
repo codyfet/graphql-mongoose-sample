@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>This is just a normal POST</h2>
+    <div>Enter a new item in the text box and hit Submit to save it to the database</div>
+    <!-- <form action="/quotes" method="POST">
+        <input type="text" placeholder="item" name="item" id="item">
+        <button type="submit">Submit</button>
+    </form> -->
+    <form>
+        <p><input placeholder="item" name="item"></p>
+        <p><input type="submit" value="Отправить" formaction="/quotes" formmethod="post"></p>
+    </form>
+    <hr>
+
+    <h2>GraphQL Test</h2>
+    <hr>
+    <div>
+        <a href="/graphql?query={todo(itemId:1){itemId,item}}">GraphQL Test</a>
+    </div>
+</body>
+
+</html>
