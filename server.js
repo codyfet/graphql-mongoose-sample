@@ -1,34 +1,42 @@
-const path = require('path');
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const graphqlHTTP = require('express-graphql');
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import graphqlHTTP from 'express-graphql';
 
-const ToDo = require("./mongoose/todo");
-
+import Todo from "./mongoose/todo";
 import schema from './graphql/schema/Schema';
 
-const app = express();
-
 mongoose.connect('mongodb://localhost:27017/todo')
+
+/**
+ * Подключаемся к БД.
+ */
 const db = mongoose.connection;
-db.on('error', () => { console.log('---FAILED to connect to mongoose') })
-db.once('open', () => {
-    console.log('+++Connected to mongoose')
+
+db.on('error', () => {
+    console.log('---FAILED to connect to mongoose');
 });
+db.once('open', () => {
+    console.log('+++Connected to mongoose');
+});
+
+/**
+ * Создаём серверное приложение.
+ */
+const app = express();
 
 app.use(bodyParser());
 
-// start the server
-app.listen(3002, () => { console.log("+++Express Server is Running at 3002 port!!!") });
+app.listen(3002, () => {
+    console.log("+++Express Server is Running at 3002 port!!!");
+});
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 });
 
 app.post('/quotes', (req, res) => {
-    // Insert into TodoList Collection
-    const todoItem = new ToDo({
+    const todoItem = new Todo({
         itemId: 1,
         item: req.body.item,
         completed: false

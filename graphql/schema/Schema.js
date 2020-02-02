@@ -9,10 +9,11 @@ import {
     GraphQLBoolean
 } from 'graphql/type';
 
-import ToDoMongo from '../../mongoose/todo'
+import TodoMongo from '../../mongoose/todo'
 
 /**
- * generate projection object for mongoose
+ * Generate projection object for mongoose.
+ *
  * @param  {Object} fieldASTs
  * @return {Project}
  */
@@ -57,17 +58,15 @@ const schema = new GraphQLSchema({
                 resolve: (root, { itemId }, source, fieldASTs) => {
                     const projections = getProjection(fieldASTs);
                     const foundItems = new Promise((resolve, reject) => {
-                        ToDoMongo.find({ itemId }, projections, (err, todos) => {
+                        TodoMongo.find({ itemId }, projections, (err, todos) => {
                             err ? reject(err) : resolve(todos)
                         })
-                    })
-
+                    });
                     return foundItems
                 }
             }
         }
     })
-
 });
 
 export default schema;

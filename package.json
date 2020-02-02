@@ -1,7 +1,7 @@
 {
   "name": "graphql-mongoose-express",
   "version": "1.0.0",
-  "description": "graphql demo",
+  "description": "graphql-mongoose-express demo",
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.19.0",
